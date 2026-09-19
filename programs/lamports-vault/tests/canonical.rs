@@ -72,13 +72,13 @@ fn vault_pda(user: &Pubkey) -> (Pubkey, u8) {
     Pubkey::find_program_address(&[VAULT_SEED, user.as_ref()], &lamports_vault::id())
 }
 
-fn initialize_ix(payer: &Pubkey, max_withdraw: u64) -> Instruction {
+fn initialize_ix(payer: &Pubkey, max_withdrawal: u64) -> Instruction {
     let (vault_state, _) = vault_state_pda(payer);
     let (vault, _) = vault_pda(payer);
 
     Instruction::new_with_bytes(
         lamports_vault::id(),
-        &lamports_vault::instruction::Initialize { max_withdraw }.data(),
+        &lamports_vault::instruction::Initialize { max_withdrawal }.data(),
         lamports_vault::accounts::Initialize {
             user: *payer,
             vault_state,

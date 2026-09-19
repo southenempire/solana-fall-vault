@@ -45,8 +45,8 @@ pub fn build_initialize_ix(payer: &Pubkey) -> Instruction {
     let (vault, _) = vault_pda(payer);
 
     Instruction::new_with_bytes(
-        lamports_vault::id(),
-        &lamports_vault::instruction::Initialize {}.data(),
+        lamports_vault::ID,
+        &lamports_vault::instruction::Initialize { max_withdrawal: u64::MAX }.data(),
         lamports_vault::accounts::Initialize {
             user: *payer,
             vault_state,
